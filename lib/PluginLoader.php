@@ -47,7 +47,7 @@ class PluginLoader
     public function httpServerStartBefore($httpServer)
     {
         foreach ($this->plugins as $plugin) {
-            if ($plugin instanceof HttpServerStartBefore) {
+            if ($plugin instanceof HttpServerStartBeforePlugin) {
                 $plugin->httpServerStartBefore($httpServer);
             }
         }
