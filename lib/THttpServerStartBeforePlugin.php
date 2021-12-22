@@ -2,7 +2,7 @@
 
 namespace Uccu\SwKoaPlugin;
 
-interface HttpServerStartBeforePlugin extends Plugin
+interface THttpServerStartBeforePlugin extends Plugin
 {
     /**
      * @param \Uccu\SwKoaHttp\HttpServer $httpServer

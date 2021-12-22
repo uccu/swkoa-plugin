@@ -2,7 +2,7 @@
 
 namespace Uccu\SwKoaPlugin;
 
-interface HttpServerHandleBeforePlugin extends Plugin
+interface IHttpServerHandleBeforePlugin extends Plugin
 {
     /**
      * @param \Uccu\SwKoaHttp\Context $ctx

@@ -2,7 +2,7 @@
 
 namespace Uccu\SwKoaPlugin;
 
-interface PoolStartAfterPlugin extends Plugin
+interface TPoolStartAfterPlugin extends Plugin
 {
     /**
      * @param \Uccu\SwKoaServer\PoolManager $manager
