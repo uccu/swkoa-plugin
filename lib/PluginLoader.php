@@ -5,8 +5,8 @@ namespace Uccu\SwKoaPlugin;
 class PluginLoader
 {
 
+    private $names = [];
     private $plugins = [];
-    private $instances = [];
 
     public function load()
     {
@@ -19,12 +19,22 @@ class PluginLoader
         }
     }
 
-    public function add($class)
+    public function add($class, $name = null)
     {
-        if (!in_array($class, $this->plugins)) {
-            array_push($this->plugins, $class);
-            $this->instances[$class] = new $class($this);
+
+        if (is_null($name)) {
+            if (is_string($class)) {
+                $name = $class;
+            } else {
+                $name = get_class($class);
+            }
         }
+
+        if (!in_array($class, $this->names)) {
+            array_push($this->names, $name);
+            $this->plugins[$name] = $class;
+        }
+
     }
 
     public function get($class)
@@ -32,54 +42,12 @@ class PluginLoader
         return $this->instances[$class] ?? null;
     }
 
-    /**
-     * @param \Uccu\SwKoaServer\PoolManager $manager
-     */
-    public function poolStartBefore($manager)
-    {
-        foreach ($this->plugins as $pluginClass) {
-            $plugin = $this->instances[$pluginClass];
-            if ($plugin instanceof PoolStartBeforePlugin) {
-                $plugin->poolStartBefore($manager);
-            }
-        }
-    }
 
-    /**
-     * @param \Uccu\SwKoaServer\PoolManager $manager
-     */
-    public function poolStartAfter($manager)
+    public function __call($name, $args)
     {
-        foreach ($this->plugins as $pluginClass) {
-            $plugin = $this->instances[$pluginClass];
-            if ($plugin instanceof PoolStartAfterPlugin) {
-                $plugin->poolStartAfter($manager);
-            }
-        }
-    }
-
-    /**
-     * @param \Uccu\SwKoaHttp\HttpServer $httpServer
-     */
-    public function httpServerStartBefore($httpServer)
-    {
-        foreach ($this->plugins as $pluginClass) {
-            $plugin = $this->instances[$pluginClass];
-            if ($plugin instanceof HttpServerStartBeforePlugin) {
-                $plugin->httpServerStartBefore($httpServer);
-            }
-        }
-    }
-
-    /**
-     * @param \Uccu\SwKoaHttp\Context $ctx
-     */
-    public function httpServerHandleBefore($ctx)
-    {
-        foreach ($this->plugins as $pluginClass) {
-            $plugin = $this->instances[$pluginClass];
-            if ($plugin instanceof HttpServerHandleBeforePlugin) {
-                $plugin->httpServerHandleBefore($ctx);
+        foreach ($this->plugins as $plugin) {
+            if (method_exists($plugin, $name)) {
+                call_user_func([$plugin, $name], ...$args);
             }
         }
     }

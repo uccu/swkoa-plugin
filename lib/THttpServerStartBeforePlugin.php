@@ -7,5 +7,5 @@ interface HttpServerStartBeforePlugin extends Plugin
     /**
      * @param \Uccu\SwKoaHttp\HttpServer $httpServer
      */
-    function httpServerStartBefore($httpServer);
+    public static function httpServerStartBefore($httpServer);
 }

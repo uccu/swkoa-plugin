@@ -2,10 +2,10 @@
 
 namespace Uccu\SwKoaPlugin;
 
-interface PoolStartAfterPlugin extends Plugin
+interface PoolStartBeforePlugin extends Plugin
 {
     /**
      * @param \Uccu\SwKoaServer\PoolManager $manager
      */
-    function poolStartAfter($manager);
+    public static function poolStartBefore($manager);
 }
