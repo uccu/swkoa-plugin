@@ -5,7 +5,7 @@ namespace Uccu\SwKoaPlugin;
 interface HttpServerHandleBeforePlugin extends Plugin
 {
     /**
-     * @param \Uccu\SwKoa\Context $ctx
+     * @param \Uccu\SwKoaHttp\Context $ctx
      */
     function httpServerHandleBefore($ctx);
 }

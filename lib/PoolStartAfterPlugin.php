@@ -2,9 +2,10 @@
 
 namespace Uccu\SwKoaPlugin;
 
-use Swoole\Process\Manager;
-
 interface PoolStartAfterPlugin extends Plugin
 {
-    function poolStartAfter(Manager $manager);
+    /**
+     * @param \Uccu\SwKoaServer\PoolManager $manager
+     */
+    function poolStartAfter($manager);
 }
