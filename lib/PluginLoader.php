@@ -14,6 +14,7 @@ class PluginLoader
         if (file_exists($path)) {
             $plugins = require($path);
             foreach ($plugins as $p) {
+
                 $this->add($p);
             }
         }
@@ -31,10 +32,14 @@ class PluginLoader
         }
 
         if (!in_array($class, $this->names)) {
+
+            if (method_exists($class, 'pluginLoaderInit')) {
+                call_user_func([$class, 'pluginLoaderInit'], $this);
+            }
+
             array_push($this->names, $name);
             $this->plugins[$name] = $class;
         }
-
     }
 
     public function get($class)
