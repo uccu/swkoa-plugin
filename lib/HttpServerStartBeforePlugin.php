@@ -1,6 +1,6 @@
 <?php
 
-namespace Uccu\SwKoaPlugin\Plugin;
+namespace Uccu\SwKoaPlugin;
 
 interface HttpServerStartBeforePlugin extends Plugin
 {
