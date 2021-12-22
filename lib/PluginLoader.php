@@ -20,7 +20,7 @@ class PluginLoader
         }
     }
 
-    public function add(Plugin $p)
+    public function add($p)
     {
         array_push($this->plugins, new $p($this));
     }
