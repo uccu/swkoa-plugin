@@ -8,14 +8,12 @@
         "plugin",
         "pzcat"
     ],
-    "homepage": "https://github.com/uccu/swkoa",
+    "homepage": "https://github.com/uccu/swkoa-plugin",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "pzcat",
-            "email": "cat@4moe.com"
-        }
-    ],
+    "authors": [{
+        "name": "pzcat",
+        "email": "cat@4moe.com"
+    }],
     "require": {
         "php": ">=7.3.0"
     },

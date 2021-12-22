@@ -1,5 +1,5 @@
-# swkoa
-a framework for PHP
+# swkoa-plugin
+plugin tool for swkoa
 
 
 # LICENSE
