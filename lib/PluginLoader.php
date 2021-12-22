@@ -3,8 +3,6 @@
 namespace Uccu\SwKoaPlugin\Plugin;
 
 use Swoole\Process\Manager;
-use Uccu\SwKoa\HttpServer;
-use Uccu\SwKoa\PoolManager;
 
 class PluginLoader
 {
@@ -36,6 +34,7 @@ class PluginLoader
             }
         }
     }
+
     public function poolStartAfter(Manager $manager)
     {
         foreach ($this->plugins as $plugin) {
@@ -44,11 +43,24 @@ class PluginLoader
             }
         }
     }
+
     public function httpServerStartBefore($httpServer)
     {
         foreach ($this->plugins as $plugin) {
             if ($plugin instanceof HttpServerStartBeforePlugin) {
                 $plugin->httpServerStartBefore($httpServer);
+            }
+        }
+    }
+
+    /**
+     * @param \Uccu\SwKoa\Context $ctx
+     */
+    public function httpServerHandleBefore($ctx)
+    {
+        foreach ($this->plugins as $plugin) {
+            if ($plugin instanceof HttpServerHandleBeforePlugin) {
+                $plugin->httpServerHandleBefore($ctx);
             }
         }
     }
